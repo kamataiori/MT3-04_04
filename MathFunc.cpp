@@ -1,4 +1,4 @@
-#include "MathFunc.h"
+﻿#include "MathFunc.h"
 #include <algorithm>
 
 Vector3 Add(const Vector3& v1, const Vector3& v2)
@@ -509,4 +509,27 @@ void RotateInCircle(const Sphere& sphere, Vector3& position, float& angle)
 	//position.x += velocity.x;
 	//position.y += velocity.y;
 	//position.z += velocity.z;
+}
+
+Vector3 Reflect(Vector3& input, Vector3& normal)
+{
+	float dotProduct = Dot(input, normal);
+	Vector3 scaledNormal = Multiply( 2.0f * dotProduct, normal);
+	return Subtract(input, scaledNormal);
+}
+
+bool IsCollision(const Sphere& sphere, const Plane& plane) {
+	// 平面の法線ベクトルを正規化する
+	float normalLength = std::sqrt(plane.normal.x * plane.normal.x +
+		plane.normal.y * plane.normal.y +
+		plane.normal.z * plane.normal.z);
+	Vector3 normalizedNormal = { plane.normal.x / normalLength,
+								 plane.normal.y / normalLength,
+								 plane.normal.z / normalLength };
+
+	// 球の中心から平面までの距離を計算する
+	float distance = Dot(normalizedNormal, sphere.center) + plane.distance;
+
+	// 距離が球の半径より小さいかどうかを確認する
+	return std::abs(distance) <= sphere.radius;
 }

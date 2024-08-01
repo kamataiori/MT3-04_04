@@ -39,3 +39,7 @@ Vector3 ClosestPointOnAABB(const Vector3& point, const AABB& aabb);
 Vector3 Lerp(const Vector3& a, const Vector3& b, float t);
 //Vector3 Bezier(const Vector3& p0, const Vector3& p1, const Vector3& p2, float t);
 void RotateInCircle(const Sphere& sphere, Vector3& position, float& angle);
+
+Vector3 Reflect(Vector3& input, Vector3& normal);
+
+bool IsCollision(const Sphere& sphere, const Plane& plane);

@@ -22,7 +22,10 @@ public:
 		(int)WHITE,
 	};
 
+	Plane plane
+	{};
 
+	float e{};
 
 
 	Vector3 cameraRotate{ 0.0f,0.0f,0.0f };
@@ -31,6 +34,8 @@ public:
 	Vector3 cameraPosition = SphericalToCartesian(radius, theta, phi);
 	Vector3 cameraTarget = { 0.0f, 0.0f, 0.0f };
 	Vector3 cameraUp = { 0.0f, 1.0f, 0.0f };
+	Matrix4x4 worldviewProjectionMatrix{};
+	//Matrix4x4 worldviewProjectionMatrix{};
 
 	Matrix4x4 viewMatrix = MakeLookAtMatrix4x4(cameraPosition, cameraTarget, cameraUp);
 	Matrix4x4 worldMatrix = MakeAffineMatrix({ 1.0f,1.0f,1.0f }, cameraRotate, cameraTranslate);
